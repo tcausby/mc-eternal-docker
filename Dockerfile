@@ -10,9 +10,9 @@ WORKDIR /srv/minecraft
 
 RUN wget "https://media.forgecdn.net/files/2884/967/Eternal+(Server+Pack+${VERSION}).zip" -O server.zip && \
         unzip server.zip -d server_zip && \
-        cd ./server_zip/* && mv -v ./* /srv/minecraft && cd /srv/minecraft && \
-        rm -rf server.zip server_zip && chown -R minecraft:minecraft /srv/minecraft
-COPY ./ServerStart.sh /
+        mv -v ./server_zip/*/* ./ && rm -rf server.zip server_zip && \
+        chown -R minecraft:minecraft /srv/minecraft
+COPY --chown=minecraft:minecraft ./ServerStart.sh /
 
 USER minecraft
 
